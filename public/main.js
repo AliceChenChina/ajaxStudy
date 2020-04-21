@@ -2,10 +2,16 @@ cssBtn.onclick= () =>{
   const ajax = new XMLHttpRequest();
   ajax.open('get', '/style.css');
   ajax.onreadystatechange=()=> {
-    if(ajax.readyState === 4 && ajax.status === 200){
-      const style = document.createElement('style')
-      style.innerHTML=ajax.response;
-      document.head.appendChild(style);
+    if(ajax.readyState === 4){
+      if(ajax.status >= 200 && ajax.status <= 300){
+        const style = document.createElement('style')
+        style.innerHTML=ajax.response;
+        document.head.appendChild(style);
+      }else{
+        alert('加载失败！')
+      }
+    } else {
+      alert('接口没反应！')
     }
   }
   ajax.send();
@@ -14,10 +20,16 @@ jsBtn.onclick= () =>{
   const ajax = new XMLHttpRequest();
   ajax.open('get', '/2.js');
   ajax.onreadystatechange=()=> {
-    if(ajax.readyState === 4 && ajax.status === 200){
-      const script = document.createElement('script');
-      script.innerHTML = ajax.response;
-      document.body.appendChild(script);
+    if(ajax.readyState === 4) {
+      if(ajax.status >=200 && ajax.status <= 300){
+        const script = document.createElement('script');
+        script.innerHTML = ajax.response;
+        document.body.appendChild(script);
+      }else{
+        alert('加载失败！')
+      }
+    }else{
+      alert('接口无响应！')
     }
   }
   ajax.send();
